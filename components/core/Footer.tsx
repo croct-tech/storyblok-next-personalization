@@ -10,8 +10,8 @@ export function Footer(): ReactElement {
                 </p>
                 <Image
                     src="/storyblok-croct-muted.svg"
-                    width={90}
-                    height={30}
+                    width={68}
+                    height={23}
                     alt="Storyblok + Croct"
                 />
             </div>
