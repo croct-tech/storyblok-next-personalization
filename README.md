@@ -124,7 +124,7 @@ components/
 
 ## Deploying
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fcroct-tech%2Fstoryblok-next-personalization)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fcroct-tech%2Fstoryblok-next-personalization&env=NEXT_PUBLIC_STORYBLOK_CONTENT_API_ACCESS_TOKEN&envDescription=Your%20Storyblok%20Content%20Delivery%20API%20access%20token&envLink=https%3A%2F%2Fwww.storyblok.com%2Fdocs%2Fapi%2Fcontent-delivery%2Fv2%2Fgetting-started%2Fauthentication)
 
 Make sure to set the environment variables listed above in your hosting provider's dashboard.
 
