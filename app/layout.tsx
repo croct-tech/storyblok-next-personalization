@@ -1,3 +1,4 @@
+import {CroctProvider} from '@croct/plug-next/CroctProvider';
 import './globals.css';
 import type {Metadata} from 'next';
 import {Plus_Jakarta_Sans as Jakarta} from 'next/font/google';
@@ -30,7 +31,9 @@ export default function RootLayout({children}: PropsWithChildren): ReactElement 
                         <TopBar/>
                         <Navigation/>
                         <div className="flex-1">
-                            {children}
+                            <CroctProvider>
+                                {children}
+                            </CroctProvider>
                         </div>
                         <Footer/>
                     </div>

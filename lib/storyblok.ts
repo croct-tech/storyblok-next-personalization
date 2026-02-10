@@ -1,3 +1,4 @@
+import {withCroct} from '@croct/plug-storyblok/next';
 import {apiPlugin, storyblokInit} from '@storyblok/react/rsc';
 import {CallToAction} from '@/components/blocks/CallToAction';
 import {Catalog} from '@/components/blocks/Catalog';
@@ -7,7 +8,7 @@ import {Note} from '@/components/blocks/Note';
 import {Page} from '@/components/blocks/Page';
 import {SplitFeature} from '@/components/blocks/SplitFeature';
 
-export const getStoryblokApi = storyblokInit({
+export const getStoryblokApi = storyblokInit(withCroct({
     accessToken: process.env.NEXT_PUBLIC_STORYBLOK_CONTENT_API_ACCESS_TOKEN,
     use: [apiPlugin],
     components: {
@@ -19,4 +20,4 @@ export const getStoryblokApi = storyblokInit({
         page: Page,
         'split-feature': SplitFeature,
     },
-});
+}));
