@@ -27,6 +27,7 @@ const eslintConfig = defineConfig([
         files: [
             '**/page.tsx',
             '**/layout.tsx',
+            '**/loading.tsx',
             '**/template.tsx',
             'next.config.ts',
             'eslint.config.mjs',

@@ -1,6 +1,6 @@
 'use client';
 
-import {createContext, useCallback, useContext, useEffect, useMemo, useSyncExternalStore} from 'react';
+import {createContext, useCallback, useContext, useMemo, useSyncExternalStore} from 'react';
 import type {PropsWithChildren, ReactElement} from 'react';
 
 type CartItem = {
@@ -13,6 +13,7 @@ type CartItem = {
 };
 
 type CartContextValue = {
+    loaded: boolean,
     items: CartItem[],
     itemCount: number,
     total: number,
@@ -26,7 +27,7 @@ const STORAGE_KEY = 'cart';
 const CartContext = createContext<CartContextValue | null>(null);
 
 let listeners: Array<() => void> = [];
-let snapshot: CartItem[] = [];
+let snapshot: CartItem[] | null = null;
 const serverSnapshot: CartItem[] = [];
 
 function readStorage(): CartItem[] {
@@ -57,6 +58,10 @@ function subscribe(listener: () => void): () => void {
 }
 
 function getSnapshot(): CartItem[] {
+    if (snapshot === null) {
+        snapshot = readStorage();
+    }
+
     return snapshot;
 }
 
@@ -64,18 +69,16 @@ function getServerSnapshot(): CartItem[] {
     return serverSnapshot;
 }
 
+function isLoaded(): boolean {
+    return snapshot !== null;
+}
+
+function isServerLoaded(): boolean {
+    return false;
+}
+
 export function CartProvider({children}: PropsWithChildren): ReactElement {
-    useEffect(
-        () => {
-            snapshot = readStorage();
-
-            for (const listener of listeners) {
-                listener();
-            }
-        },
-        [],
-    );
-
+    const loaded = useSyncExternalStore(subscribe, isLoaded, isServerLoaded);
     const items = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
     const addItem = useCallback(
@@ -128,8 +131,16 @@ export function CartProvider({children}: PropsWithChildren): ReactElement {
     const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     const value = useMemo(
-        () => ({items: items, itemCount: itemCount, total: total, addItem: addItem, removeItem: removeItem, updateQuantity: updateQuantity}),
-        [items, itemCount, total, addItem, removeItem, updateQuantity],
+        () => ({
+            loaded: loaded,
+            items: items,
+            itemCount: itemCount,
+            total: total,
+            addItem: addItem,
+            removeItem: removeItem,
+            updateQuantity: updateQuantity,
+        }),
+        [loaded, items, itemCount, total, addItem, removeItem, updateQuantity],
     );
 
     return (
