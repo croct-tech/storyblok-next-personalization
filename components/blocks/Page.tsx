@@ -15,7 +15,7 @@ export function Page({blok}: PageProps): ReactElement {
     return (
         <main {...storyblokEditable(blok)}>
             <h1 className="sr-only">{blok.name}</h1>
-            <div>
+            <div className="flex flex-col">
                 {blok.body.map(
                     nestedBlok => (
                         <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />

@@ -22,13 +22,13 @@ export type CallToActionProps = {
 
 export function CallToAction({blok}: CallToActionProps): ReactElement {
     return (
-        <div {...storyblokEditable(blok)}>
+        <div {...storyblokEditable(blok)} className="contents md:block">
             <Link
                 href={`${blok.link.story?.url ?? '/catalog/'}`}
-                className="block bg-[#f5f5f7]"
+                className="contents md:block bg-[#f5f5f7]"
             >
-                <div className="flex flex-col md:flex-row md:h-[80vh] md:min-h-[500px]">
-                    <div className="flex flex-col justify-center px-8 md:px-16 py-12 md:py-0 md:w-1/2">
+                <div className="contents md:flex md:flex-row md:h-[80vh] md:min-h-[500px]">
+                    <div className="flex flex-col justify-center px-8 md:px-16 py-8 md:py-0 md:w-1/2 order-1 md:order-none bg-[#f5f5f7] md:bg-transparent">
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-[#1d1d1f]">
                             {blok.headline}
                         </h2>
@@ -42,7 +42,7 @@ export function CallToAction({blok}: CallToActionProps): ReactElement {
                             </svg>
                         </span>
                     </div>
-                    <div className="relative min-h-[60vh] md:min-h-0 md:w-1/2 overflow-hidden">
+                    <div className="relative min-h-[60vh] md:min-h-0 md:w-1/2 overflow-hidden order-3 md:order-none">
                         <Image
                             src={blok.image.filename}
                             fill
