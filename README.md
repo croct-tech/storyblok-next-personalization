@@ -29,6 +29,7 @@ A minimal fashion store that demonstrates how Storyblok and Croct work together 
 - **Storyblok** manages the homepage hero, call-to-action blocks, and product catalog
 - **Croct** delivers personalized content and tracks user interests in real time
 - **Shopping cart** with add, remove, and quantity controls
+- **Discount coupons** validated server-side against personalized eligibility rules from Croct
 
 ## Getting started
 
@@ -116,7 +117,8 @@ app/
 ├── page.tsx                        # Home (Storyblok story + static sections)
 ├── catalog/[[...category]]/        # Product listing with category filtering
 ├── product/[slug]/                 # Product detail page
-└── cart/                           # Shopping cart
+├── cart/                           # Shopping cart
+└── api/coupon/                     # Coupon validation endpoint
 components/
 ├── blocks/                         # Storyblok content blocks (CTA, Catalog, Note…)
 └── core/                           # App shell (Navigation, Cart, TopBar…)
