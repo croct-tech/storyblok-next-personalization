@@ -1,3 +1,35 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme inline {
+    --font-sans: var(--font-sans);
+    --color-primary: #1d1d1f;
+    --color-accent: #0071e3;
+    --color-surface: #ffffff;
+    --color-surface-alt: #f5f5f7;
+    --color-muted: #86868b;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-fallback), system-ui, "Helvetica Neue", sans-serif;
+    background: #fff;
+    min-height: 100vh;
+    color: #1d1d1f;
+}
+
+@keyframes pageIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.page-transition {
+    animation: pageIn 0.4s ease-out both;
+}
+
+::selection {
+    background-color: var(--color-accent);
+    color: white;
+}
