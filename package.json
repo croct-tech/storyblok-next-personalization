@@ -27,12 +27,12 @@
   "dependencies": {
     "@croct/content": "^1.1.0",
     "@croct/md-lite": "^0.3.1",
-    "@croct/plug-next": "^0.8.1",
+    "@croct/plug-next": "^0.8.2",
     "@croct/plug-storyblok": "^0.1.0-alpha",
     "@storyblok/react": "^5.4.21",
-    "next": "16.1.4",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "next": "^16",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
     "@croct/eslint-plugin": "^0.8.3",
