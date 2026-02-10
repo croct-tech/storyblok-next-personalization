@@ -72,7 +72,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## How the integration works
 
-Adding Croct to an existing Storyblok + Next.js project takes three small changes. You can see the exact diff in [this commit](PLACEHOLDER).
+Adding Croct to an existing Storyblok + Next.js project takes three small changes. Check the [commit history](https://github.com/croct-tech/storyblok-next-personalization/commit/ed9cb61c4915aa9f1a11e513a8dc1d125642f57c) to see the exact diff.
 
 **1. Wrap the Storyblok init with `withCroct`**
 
