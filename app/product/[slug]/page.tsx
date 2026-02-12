@@ -34,8 +34,8 @@ async function getProduct(slug: string): Promise<Product> {
     return product;
 }
 
-function capitalize(value: string): string {
-    return value.charAt(0).toUpperCase() + value.slice(1);
+function capitalize(value: string | number): string {
+    return String(value).charAt(0).toUpperCase() + String(value).slice(1);
 }
 
 export async function generateMetadata({params}: PageProps<'/product/[slug]'>): Promise<Metadata> {
@@ -43,7 +43,7 @@ export async function generateMetadata({params}: PageProps<'/product/[slug]'>): 
     const product = await getProduct(slug);
 
     return {
-        title: product.content.title ?? product.name,
+        title: product.name,
         description: product.content.tagline ?? product.content.description ?? `Shop ${product.name} — €${product.content.price}`,
     };
 }
@@ -57,9 +57,9 @@ export default async function ProductPage({params}: PageProps<'/product/[slug]'>
         '@context': 'https://schema.org',
         '@type': 'Product',
         identifier: product.slug,
-        name: product.content.title ?? product.name,
+        name: product.name,
         url: `/product/${product.slug}`,
-        image: product.content.image.filename,
+        image: product.content.image.filename!,
         offers: {
             '@type': 'Offer',
             price: product.content.price,
@@ -84,9 +84,9 @@ export default async function ProductPage({params}: PageProps<'/product/[slug]'>
             />
 
             <div className="md:grid md:grid-cols-2 md:min-h-[calc(100vh-64px)]">
-                <div className="relative bg-[#f5f5f7] min-h-[50vh] md:sticky md:top-0 md:h-screen">
+                <div className="relative bg-surface-alt min-h-[50vh] md:sticky md:top-0 md:h-screen">
                     <Image
-                        src={product.content.image.filename}
+                        src={product.content.image.filename!}
                         fill
                         alt={product.name}
                         className="object-cover"
@@ -99,23 +99,23 @@ export default async function ProductPage({params}: PageProps<'/product/[slug]'>
                     {category !== undefined && (
                         <Link
                             href={`/catalog/${category}`}
-                            className="text-xs font-medium uppercase tracking-widest text-[#86868b] hover:text-[#1d1d1f] transition-colors"
+                            className="text-xs font-medium uppercase tracking-widest text-muted hover:text-primary transition-colors"
                         >
                             {capitalize(category)}
                         </Link>
                     )}
 
-                    <h1 className="mt-2 text-4xl md:text-5xl font-semibold tracking-tight text-[#1d1d1f]">
+                    <h1 className="mt-2 text-4xl md:text-5xl font-semibold tracking-tight text-primary">
                         {product.name}
                     </h1>
 
                     {product.content.tagline !== undefined && (
-                        <p className="mt-3 text-lg text-[#86868b]">
+                        <p className="mt-3 text-lg text-muted">
                             {product.content.tagline}
                         </p>
                     )}
 
-                    <p className="mt-3 text-xl text-[#1d1d1f]">
+                    <p className="mt-3 text-xl text-primary">
                         &euro; {product.content.price}
                     </p>
 
@@ -124,13 +124,13 @@ export default async function ProductPage({params}: PageProps<'/product/[slug]'>
                             id={product.uuid}
                             name={product.name}
                             slug={product.slug}
-                            image={product.content.image.filename}
-                            price={product.content.price}
+                            image={product.content.image.filename!}
+                            price={Number.parseFloat(product.content.price)}
                         />
                     </div>
 
                     {product.content.description !== undefined && (
-                        <div className="mt-8 text-[#1d1d1f]/80 leading-relaxed">
+                        <div className="mt-8 text-primary/80 leading-relaxed">
                             {renderMarkdown(product.content.description)}
                         </div>
                     )}
@@ -138,7 +138,7 @@ export default async function ProductPage({params}: PageProps<'/product/[slug]'>
                     <div className="mt-10">
                         <Link
                             href={category !== undefined ? `/catalog/${category}` : '/catalog'}
-                            className="text-[#06c] hover:underline"
+                            className="text-link hover:underline"
                         >
                             &larr; Back to catalog
                         </Link>

@@ -2,7 +2,8 @@
 
 import {useRouter} from 'next/navigation';
 import type {ReactElement} from 'react';
-import {useCart} from '@/components/core/CartContext';
+import {useCroct} from '@croct/plug-next';
+import {useCart} from '@/components/core/CartProvider';
 
 type AddToCartButtonProps = {
     id: string,
@@ -14,11 +15,25 @@ type AddToCartButtonProps = {
 
 export function AddToCartButton(props: AddToCartButtonProps): ReactElement {
     const {id, name, slug, image, price} = props;
-    const {addItem} = useCart();
+    const croct = useCroct();
+    const cart = useCart();
     const router = useRouter();
 
     const handleClick = (): void => {
-        addItem({id: id, name: name, slug: slug, image: image, price: price});
+        cart.addItem({
+            id: id,
+            name: name,
+            slug: slug,
+            image: image,
+            price: price,
+        });
+
+        void croct.track('goalCompleted', {
+            goalId: 'cart-addition',
+            value: price,
+            currency: cart.currency,
+        });
+
         router.push('/cart');
     };
 
@@ -26,9 +41,9 @@ export function AddToCartButton(props: AddToCartButtonProps): ReactElement {
         <button
             type="button"
             onClick={handleClick}
-            className="w-full rounded-full bg-[#0071e3] px-6 py-3 text-sm font-medium text-white hover:bg-[#0077ed] transition-colors"
+            className="w-full max-w-xs rounded-full bg-accent px-6 py-3 text-sm font-medium text-white hover:bg-accent-hover transition-colors"
         >
-            Add to Bag
+            Add to bag
         </button>
     );
 }

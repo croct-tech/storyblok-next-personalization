@@ -1,0 +1,23 @@
+{
+  "coupons": [
+    {
+      "version": 3,
+      "content": {
+        "en-us": {
+          "_component": "coupon-list@3",
+          "coupons": [
+            {
+              "code": "Welcome",
+              "rule": "Discount available in your first visit only.",
+              "title": "Discount for your first visit.",
+              "discount": 10,
+              "eligible": false,
+              "maxDiscount": 100,
+              "freeShipping": false
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

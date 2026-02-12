@@ -22,13 +22,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "update-sb-types": "storyblok components pull --space 289964601464397 && storyblok types generate --space 289964601464397",
     "postinstall": "croct --no-interaction install"
   },
   "dependencies": {
     "@croct/content": "^1.1.0",
     "@croct/md-lite": "^0.3.1",
     "@croct/plug-next": "^0.8.2",
-    "@croct/plug-storyblok": "^0.1.0-alpha",
+    "@croct/plug-storyblok": "^0.1.0-alpha2",
+
     "@storyblok/react": "^5.4.21",
     "next": "^16",
     "react": "^19.2.3",
@@ -37,6 +39,7 @@
   "devDependencies": {
     "@croct/eslint-plugin": "^0.8.3",
     "@tailwindcss/postcss": "^4",
+    "storyblok": "^4.15.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

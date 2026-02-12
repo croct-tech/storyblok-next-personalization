@@ -4,16 +4,29 @@
     --font-sans: var(--font-sans);
     --color-primary: #1d1d1f;
     --color-accent: #0071e3;
+    --color-accent-hover: #0077ed;
     --color-surface: #ffffff;
     --color-surface-alt: #f5f5f7;
+    --color-surface-hover: #e8e8ed;
     --color-muted: #86868b;
+    --color-border: #d2d2d7;
+    --color-success: #34c759;
+    --color-error: #ff3b30;
+    --color-link: #06c;
+    --color-skeleton: #ebebed;
+    --color-progress-track: #e5e5ea;
+}
+
+:root {
+    --color-nav-bg: rgba(251, 251, 253, 0.8);
+    --color-nav-bg-solid: rgba(251, 251, 253, 0.95);
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-fallback), system-ui, "Helvetica Neue", sans-serif;
-    background: #fff;
+    background: var(--color-surface);
     min-height: 100vh;
-    color: #1d1d1f;
+    color: var(--color-primary);
 }
 
 @keyframes pageIn {
@@ -27,6 +40,180 @@ body {
 
 .page-transition {
     animation: pageIn 0.4s ease-out both;
+}
+
+@keyframes checkoutEnter {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.checkout-enter {
+    animation: checkoutEnter 0.4s ease-out both;
+}
+
+@keyframes confirmationFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.confirmation-fade-in {
+    animation: confirmationFadeIn 0.5s ease-out both;
+}
+
+@keyframes checkmarkCircleDraw {
+    from {
+        stroke-dashoffset: 166;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes checkmarkCheckDraw {
+    from {
+        stroke-dashoffset: 36;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes newsletterFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes newsletterCheck {
+    from {
+        stroke-dashoffset: 40;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.newsletter-fade-in {
+    animation: newsletterFadeIn 0.6s ease-out both;
+}
+
+.newsletter-check {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: newsletterCheck 0.4s ease-out 0.3s forwards;
+}
+
+@keyframes conciergeOverlayIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes conciergeOverlayOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.concierge-overlay-in {
+    animation: conciergeOverlayIn 0.3s ease-out both;
+}
+
+.concierge-overlay-out {
+    animation: conciergeOverlayOut 0.2s ease-in both;
+}
+
+@keyframes conciergeCardIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes conciergeCardOut {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95) translateY(16px);
+    }
+}
+
+.concierge-card-in {
+    animation: conciergeCardIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.concierge-card-out {
+    animation: conciergeCardOut 0.25s ease-in both;
+}
+
+@keyframes conciergeSlideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes conciergeSlideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.concierge-slide-in-right {
+    animation: conciergeSlideInRight 0.35s ease-out both;
+}
+
+.concierge-slide-in-left {
+    animation: conciergeSlideInLeft 0.35s ease-out both;
+}
+
+@keyframes conciergeOptionPop {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    70% {
+        transform: scale(1.02);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.concierge-option-pop {
+    animation: conciergeOptionPop 0.3s ease-out both;
 }
 
 ::selection {

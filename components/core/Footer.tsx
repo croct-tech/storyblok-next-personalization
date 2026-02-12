@@ -3,9 +3,9 @@ import type {ReactElement} from 'react';
 
 export function Footer(): ReactElement {
     return (
-        <footer className="border-t border-[#d2d2d7]/60">
+        <footer className="border-t border-border/60">
             <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-                <p className="text-xs text-[#86868b]">
+                <p className="text-xs text-muted">
                     Powered by Storyblok, Croct &amp; Next.js
                 </p>
                 <Image

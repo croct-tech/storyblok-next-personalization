@@ -1,6 +1,8 @@
 import {withCroct} from '@croct/plug-storyblok/next';
 import {apiPlugin, storyblokInit} from '@storyblok/react/rsc';
-import {CallToAction} from '@/components/blocks/CallToAction';
+import {AnnouncementBar} from '@/components/blocks/AnnouncementBar';
+import {CheckoutCallout} from '@/components/blocks/CheckoutCallout';
+import {HeroSection} from '@/components/blocks/HeroSection';
 import {Catalog} from '@/components/blocks/Catalog';
 import {FeatureStrip} from '@/components/blocks/FeatureStrip';
 import {Marquee} from '@/components/blocks/Marquee';
@@ -12,7 +14,9 @@ export const getStoryblokApi = storyblokInit(withCroct({
     accessToken: process.env.NEXT_PUBLIC_STORYBLOK_CONTENT_API_ACCESS_TOKEN,
     use: [apiPlugin],
     components: {
-        'call-to-action': CallToAction,
+        'announcement-bar': AnnouncementBar,
+        'checkout-callout': CheckoutCallout,
+        'hero-section': HeroSection,
         catalog: Catalog,
         'feature-strip': FeatureStrip,
         marquee: Marquee,
