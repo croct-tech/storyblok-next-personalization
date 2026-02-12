@@ -14,9 +14,9 @@ export function Note({blok}: NoteProps): ReactElement {
         <div
             {...storyblokEditable(blok)}
             key={blok._uid}
-            className="order-2 md:order-none md:h-0 bg-[#f5f5f7] md:bg-transparent"
+            className="order-2 lg:order-none lg:h-0 bg-surface-alt lg:bg-transparent"
         >
-            <div className="md:-translate-y-full pointer-events-none px-8 md:px-16 pb-4 text-xs text-[#86868b]/80 leading-normal w-full md:w-1/2">
+            <div className="lg:-translate-y-full pointer-events-none px-8 lg:px-16 pb-4 text-sm text-muted/80 leading-normal w-full lg:w-1/2">
                 {renderMarkdown(blok.content)}
             </div>
         </div>

@@ -26,7 +26,7 @@ export function SplitFeature({blok}: SplitFeatureProps): ReactElement {
     const imageRight = blok.layout === 'image_right';
 
     const imageBlock = (
-        <div className="relative aspect-[4/5] md:aspect-auto md:h-auto overflow-hidden rounded-3xl bg-[#f5f5f7]">
+        <div className="relative aspect-[4/5] md:aspect-auto md:h-auto overflow-hidden rounded-3xl bg-surface-alt">
             <Image
                 src={blok.image.filename}
                 fill
@@ -39,16 +39,16 @@ export function SplitFeature({blok}: SplitFeatureProps): ReactElement {
 
     const textBlock = (
         <div className="flex flex-col justify-center px-2 md:px-12 py-8">
-            <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-[#1d1d1f]">
+            <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-primary">
                 {blok.headline}
             </h2>
-            <div className="mt-4 text-lg text-[#86868b] leading-relaxed max-w-lg">
+            <div className="mt-4 text-lg text-muted leading-relaxed max-w-lg">
                 {renderMarkdown(blok.text)}
             </div>
             {blok.link?.story?.url !== undefined && (
                 <Link
                     href={blok.link.story.url}
-                    className="mt-6 inline-flex items-center text-[#06c] text-lg hover:underline"
+                    className="mt-6 inline-flex items-center text-link text-lg hover:underline"
                 >
                     {blok.link_label ?? 'Learn more'}
                     <svg className="w-3.5 h-3.5 ml-1" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">

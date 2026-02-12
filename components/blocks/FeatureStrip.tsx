@@ -36,16 +36,16 @@ const icons: Record<string, ReactElement> = {
 
 export function FeatureStrip({blok}: FeatureStripProps): ReactElement {
     return (
-        <div {...storyblokEditable(blok)} className="border-y border-[#d2d2d7]/40">
+        <div {...storyblokEditable(blok)} className="border-y border-border/40">
             <div className="container mx-auto px-6 py-8">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     {blok.features.map(
                         feature => (
                             <div key={feature._uid} className="flex flex-col items-center text-center gap-2">
-                                <span className="text-[#1d1d1f]/70">
+                                <span className="text-primary/70">
                                     {icons[feature.icon] ?? icons.shipping}
                                 </span>
-                                <span className="text-sm font-medium text-[#1d1d1f]">
+                                <span className="text-sm font-medium text-primary">
                                     {feature.label}
                                 </span>
                             </div>

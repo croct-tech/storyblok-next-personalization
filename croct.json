@@ -4,7 +4,9 @@
     "en-us"
   ],
   "defaultLocale": "en-us",
-  "slots": {},
+  "slots": {
+    "coupons": "3"
+  },
   "components": {},
   "paths": {
     "source": ".",

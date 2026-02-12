@@ -5,6 +5,45 @@ import Link from 'next/link';
 import {useState} from 'react';
 import type {ReactElement} from 'react';
 import {CartIcon} from '@/components/core/CartIcon';
+import {useAuth} from '@/components/core/AuthProvider';
+import {formatAccountInitials} from '@/lib/account';
+
+function UserNavButton(): ReactElement {
+    const auth = useAuth();
+
+    if (!auth.loaded) {
+        return <div className="w-[34px] h-[34px]" />;
+    }
+
+    if (auth.isLoggedIn) {
+        const account = auth.currentAccount!;
+
+        return (
+            <Link
+                href="/signin"
+                className="relative p-2 transition-opacity"
+                aria-label="Account"
+            >
+                <div className="flex items-center justify-center w-[18px] h-[18px] rounded-full bg-accent text-white text-[8px] font-semibold leading-none">
+                    {formatAccountInitials(account)}
+                </div>
+            </Link>
+        );
+    }
+
+    return (
+        <Link
+            href="/signin"
+            className="relative p-2 text-primary/60 hover:text-primary transition-opacity"
+            aria-label="Sign in"
+        >
+            <svg className="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+            </svg>
+        </Link>
+    );
+}
 
 const links = [
     {href: '/', label: 'Home'},
@@ -17,7 +56,7 @@ export function Navigation(): ReactElement {
     const [open, setOpen] = useState(false);
 
     return (
-        <header className="sticky top-0 z-50 w-full bg-[rgba(251,251,253,0.8)] backdrop-blur-xl border-b border-[#d2d2d7]/60">
+        <header className="sticky top-0 z-50 w-full bg-[var(--color-nav-bg)] backdrop-blur-xl border-b border-border/60">
             <nav role="navigation">
                 <div className="container mx-auto px-6 h-14 flex items-center">
                     <div className="mr-6">
@@ -31,9 +70,10 @@ export function Navigation(): ReactElement {
                         </Link>
                     </div>
                     <div className="flex items-center ml-auto md:hidden">
+                        <UserNavButton />
                         <CartIcon />
                         <button
-                            className="flex items-center p-2 text-[#1d1d1f]/60 hover:text-[#1d1d1f] transition-opacity"
+                            className="flex items-center p-2 text-primary/60 hover:text-primary transition-opacity"
                             type="button"
                             onClick={() => setOpen(prev => !prev)}
                             aria-expanded={open}
@@ -59,7 +99,7 @@ export function Navigation(): ReactElement {
                                     <li key={link.href}>
                                         <Link
                                             href={link.href}
-                                            className="block px-3 py-2 text-sm text-[#1d1d1f]/80 hover:text-[#1d1d1f] transition-opacity"
+                                            className="block px-3 py-2 text-sm text-primary/80 hover:text-primary transition-opacity"
                                         >
                                             {link.label}
                                         </Link>
@@ -67,18 +107,19 @@ export function Navigation(): ReactElement {
                                 ),
                             )}
                         </ul>
+                        <UserNavButton />
                         <CartIcon />
                     </div>
                 </div>
                 {open && (
-                    <div className="md:hidden border-t border-[#d2d2d7]/40 bg-[rgba(251,251,253,0.95)] backdrop-blur-xl">
+                    <div className="md:hidden border-t border-border/40 bg-[var(--color-nav-bg-solid)] backdrop-blur-xl">
                         <ul className="container mx-auto px-6 py-2">
                             {links.map(
                                 link => (
                                     <li key={link.href}>
                                         <Link
                                             href={link.href}
-                                            className="block py-2.5 text-sm text-[#1d1d1f]/80 hover:text-[#1d1d1f] transition-opacity"
+                                            className="block py-2.5 text-sm text-primary/80 hover:text-primary transition-opacity"
                                             onClick={() => setOpen(false)}
                                         >
                                             {link.label}
