@@ -1,27 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import type {SbBlokData} from '@storyblok/react/rsc';
 import {storyblokEditable} from '@storyblok/react/rsc';
 import type {ReactElement} from 'react';
 import {useCroct} from '@croct/plug-next';
+import type {HeroSection as HeroSectionBlok} from '@/.storyblok/types/289964601464397/storyblok-components';
 import {renderMarkdown} from '@/lib/markdown';
 
 export type HeroSectionProps = {
-    blok: {
-        headline: string,
-        tagline: string,
-        cta: Array<{
-            label: string,
-            link: {
-                story?: {
-                    url: string,
-                },
-            },
-        }>,
-        image: {
-            filename: string,
-            alt: string,
-        },
-    },
+    blok: SbBlokData & HeroSectionBlok,
 };
 
 export function HeroSection({blok}: HeroSectionProps): ReactElement {
@@ -41,7 +28,7 @@ export function HeroSection({blok}: HeroSectionProps): ReactElement {
                         </div>
                         <Link
                             onClick={() => croct.track('goalCompleted', {goalId: 'hero-cta-click'})}
-                            href={cta?.link.story?.url ?? '/catalog/'}
+                            href={cta?.link.cached_url}
                             className="mt-8 self-start rounded-full bg-primary px-8 py-3 text-base font-medium text-white text-center hover:bg-primary/85 transition-colors"
                         >
                             {cta?.label}
@@ -49,7 +36,7 @@ export function HeroSection({blok}: HeroSectionProps): ReactElement {
                     </div>
                     <div className="relative min-h-[60vh] lg:min-h-0 lg:w-1/2 overflow-hidden order-3 lg:order-none">
                         <Image
-                            src={blok.image.filename}
+                            src={blok.image.filename!}
                             fill
                             alt={blok.image?.alt ?? 'Call to Action Image'}
                             className="object-cover object-top"

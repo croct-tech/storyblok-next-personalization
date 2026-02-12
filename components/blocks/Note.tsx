@@ -1,12 +1,11 @@
 import type {SbBlokData} from '@storyblok/react/rsc';
 import {storyblokEditable} from '@storyblok/react/rsc';
 import type {ReactElement} from 'react';
+import type {Note as NoteBlok} from '@/.storyblok/types/289964601464397/storyblok-components';
 import {renderMarkdown} from '@/lib/markdown';
 
 type NoteProps = {
-    blok: SbBlokData & {
-        content: string,
-    },
+    blok: SbBlokData & NoteBlok,
 };
 
 export function Note({blok}: NoteProps): ReactElement {

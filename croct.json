@@ -1,5 +1,10 @@
 {
   "$schema": "https://schema.croct.com/json/v1/project.json",
+  "organization": "storyblok-croct-demo",
+  "workspace": "nextjs",
+  "applications": {
+    "development": "website-dev"
+  },
   "locales": [
     "en-us"
   ],
