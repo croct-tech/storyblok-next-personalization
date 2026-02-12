@@ -2,6 +2,7 @@ import Link from 'next/link';
 import {storyblokEditable} from '@storyblok/react/rsc';
 import type {ReactElement} from 'react';
 import {useCroct} from '@croct/plug-next';
+import {renderMarkdown} from '@/lib/markdown';
 
 export type AnnouncementBarProps = {
     blok: {
@@ -24,7 +25,7 @@ export function AnnouncementBar({blok}: AnnouncementBarProps): ReactElement {
     return (
         <div {...storyblokEditable(blok)} className="bg-primary text-white text-sm text-center py-2.5 px-6">
             <p>
-                {blok.text}{' '}
+                {renderMarkdown(blok.text, {code: 'bg-white/15 rounded px-1.5 py-0.5 font-semibold tracking-wide'})}{' '}
                 {cta != null && (
                     <Link
                         onClick={() => void croct.track('goalCompleted', {goalId: 'announcement-bar-click'})}
