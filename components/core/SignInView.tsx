@@ -32,7 +32,6 @@ export function SignInView(): ReactElement {
     );
 
     async function handleLogout(): Promise<void> {
-        void croct.anonymize();
         await auth.logout();
     }
 
