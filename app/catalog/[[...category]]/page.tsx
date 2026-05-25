@@ -4,6 +4,8 @@ import type {ReactElement} from 'react';
 import type {Product} from '@/components/blocks/Catalog';
 import {Catalog} from '@/components/blocks/Catalog';
 import {getStoryblokApi} from '@/lib/storyblok';
+import {getStoryblokLanguage} from '@/lib/locale';
+import {getLocale} from '@/lib/locale.server';
 
 export async function generateMetadata({params}: PageProps<'/catalog/[[...category]]'>): Promise<Metadata> {
     const {category = []} = await params;
@@ -42,9 +44,12 @@ export default async function CatalogPage({params}: PageProps<'/catalog/[[...cat
 }
 
 export async function fetchData(category?: string): Promise<Product[]> {
+    const locale = await getLocale();
+
     const params: ISbStoriesParams = {
         version: 'draft',
         resolve_links: 'url',
+        language: getStoryblokLanguage(locale),
         filter_query: {
             component: {
                 in: 'product',

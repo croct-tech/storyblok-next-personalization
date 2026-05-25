@@ -5,6 +5,8 @@ import type {ReactElement} from 'react';
 import type {Page} from '@/.storyblok/types/289964601464397/storyblok-components';
 import {NewsletterSignup} from '@/components/core/NewsletterSignup';
 import {getStoryblokApi} from '@/lib/storyblok';
+import {getStoryblokLanguage} from '@/lib/locale';
+import {getLocale} from '@/lib/locale.server';
 
 function Features(): ReactElement {
     const features = [
@@ -132,10 +134,12 @@ export default async function Home(): Promise<ReactElement> {
 }
 
 async function fetchData(): Promise<{data: {story: ISbStoryData<Page>}}> {
+    const locale = await getLocale();
     const storyblokApi = getStoryblokApi();
 
     return storyblokApi.get('cdn/stories/home', {
         version: 'draft',
         resolve_links: 'url',
+        language: getStoryblokLanguage(locale),
     });
 }
