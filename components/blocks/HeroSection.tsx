@@ -23,9 +23,11 @@ export function HeroSection({blok}: HeroSectionProps): ReactElement {
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-primary">
                             {blok.headline}
                         </h2>
-                        <div className="mt-3 lg:mt-6 text-muted text-xl md:text-2xl leading-relaxed">
-                            {renderMarkdown(blok.tagline)}
-                        </div>
+                        {blok.tagline !== undefined && (
+                            <div className="mt-3 lg:mt-6 text-muted text-xl md:text-2xl leading-relaxed">
+                                {renderMarkdown(blok.tagline)}
+                            </div>
+                        )}
                         <Link
                             onClick={() => croct.track('goalCompleted', {goalId: 'hero-cta-click'})}
                             href={cta?.link.cached_url}

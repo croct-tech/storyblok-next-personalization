@@ -29,7 +29,7 @@
     "@croct/content": "^1.1.0",
     "@croct/md-lite": "^0.3.1",
     "@croct/plug-next": "^0.10.1",
-    "@croct/plug-storyblok": "^0.1.4",
+    "@croct/plug-storyblok": "^0.1.5",
     "@storyblok/react": "^5.4.21",
     "next": "^16",
     "react": "^19.2.3",
