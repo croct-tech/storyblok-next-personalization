@@ -7,14 +7,18 @@ import type {ReactElement} from 'react';
 import type {Product} from '@/components/blocks/Catalog';
 import {AddToCartButton} from '@/components/core/AddToCartButton';
 import {getStoryblokApi} from '@/lib/storyblok';
+import {getStoryblokLanguage} from '@/lib/locale';
+import {getLocale} from '@/lib/locale.server';
 import {renderMarkdown} from '@/lib/markdown';
 
 async function getProduct(slug: string): Promise<Product> {
+    const locale = await getLocale();
     const storyblokApi = getStoryblokApi();
 
     const params: ISbStoriesParams = {
         version: 'draft',
         resolve_links: 'url',
+        language: getStoryblokLanguage(locale),
         filter_query: {
             component: {
                 in: 'product',

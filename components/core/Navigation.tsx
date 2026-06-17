@@ -5,8 +5,10 @@ import Link from 'next/link';
 import {useState} from 'react';
 import type {ReactElement} from 'react';
 import {CartIcon} from '@/components/core/CartIcon';
+import {LocaleSelector} from '@/components/core/LocaleSelector';
 import {useAuth} from '@/components/core/AuthProvider';
 import {formatAccountInitials} from '@/lib/account';
+import type {Locale} from '@/lib/locale';
 
 function UserNavButton(): ReactElement {
     const auth = useAuth();
@@ -52,7 +54,11 @@ const links = [
     {href: '/catalog/elegant', label: 'Elegant Clothing'},
 ];
 
-export function Navigation(): ReactElement {
+type NavigationProps = {
+    locale: Locale,
+};
+
+export function Navigation({locale}: NavigationProps): ReactElement {
     const [open, setOpen] = useState(false);
 
     return (
@@ -70,6 +76,7 @@ export function Navigation(): ReactElement {
                         </Link>
                     </div>
                     <div className="flex items-center ml-auto md:hidden">
+                        <LocaleSelector current={locale} />
                         <UserNavButton />
                         <CartIcon />
                         <button
@@ -107,6 +114,7 @@ export function Navigation(): ReactElement {
                                 ),
                             )}
                         </ul>
+                        <LocaleSelector current={locale} />
                         <UserNavButton />
                         <CartIcon />
                     </div>

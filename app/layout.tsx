@@ -15,6 +15,8 @@ import {Navigation} from '@/components/core/Navigation';
 import {Footer} from '@/components/core/Footer';
 import {ConciergeButton} from '@/components/core/ConciergeButton';
 import {getStoryblokApi} from '@/lib/storyblok';
+import {getStoryblokLanguage} from '@/lib/locale';
+import {getLocale} from '@/lib/locale.server';
 
 const plusJakarta = Jakarta({
     variable: '--font-fallback',
@@ -35,14 +37,17 @@ export const metadata: Metadata = {
 export default async function RootLayout({children}: PropsWithChildren): Promise<ReactElement> {
     const cookieStore = await cookies();
     const sessionEmail = cookieStore.get(SESSION_COOKIE)?.value;
+    const locale = await getLocale();
+    const language = getStoryblokLanguage(locale);
 
     const storyblokApi = getStoryblokApi();
     const {data}: {data: {story: ISbStoryData<AnnouncementBar>}} = await storyblokApi.get('cdn/stories/announcement-bar', {
         version: 'draft',
         resolve_links: 'url',
+        language: language,
     });
 
-    return (<html lang="en">
+    return (<html lang={locale}>
         <body className={`${plusJakarta.variable} antialiased`}>
             <StoryblokProvider>
                 <CroctProvider>
@@ -50,7 +55,7 @@ export default async function RootLayout({children}: PropsWithChildren): Promise
                         <CartProvider>
                             <div className="min-h-screen flex flex-col">
                                 <StoryblokServerComponent blok={data.story.content} />
-                                <Navigation/>
+                                <Navigation locale={locale}/>
                                 <div className="flex-1">
                                     {children}
                                 </div>
